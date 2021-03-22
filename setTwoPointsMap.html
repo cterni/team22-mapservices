@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title> Here is your map from Texas State Capitol to Round Rock Donuts </title>
     <meta charset='utf-8' />
     <title></title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -91,14 +92,12 @@ geojson.features.forEach(function(marker) {
   // make a marker for each feature and add to the map
   new mapboxgl.Marker(el)
     .setLngLat(marker.geometry.coordinates)
+    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+      .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
     .addTo(map);
 });
 
-new mapboxgl.Marker(el)
-  .setLngLat(marker.geometry.coordinates)
-  .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
-    .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
-  .addTo(map);
+
 
 </script>
 
