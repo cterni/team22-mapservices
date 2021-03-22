@@ -19,8 +19,8 @@
      var map = new mapboxgl.Map({
        container: 'map',
        style: 'mapbox://styles/mapbox/streets-v11',
-       center: [-97.7, 30.2],
-       zoom: 9
+       center: [-97.7, 30.2], // starting view position
+       zoom: 9 // starting zoom
      });
      // Initialize the start and end coordinates. This makes it easier for us if we
      // want to change the coordinates
@@ -68,6 +68,8 @@
          }
        });
      });
+     // Add zoom and rotation controls to the map.
+     map.addControl(new mapboxgl.NavigationControl());
 </script>
 
   </body>
