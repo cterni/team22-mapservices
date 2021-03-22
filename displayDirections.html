@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Route finder</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <!-- Import Mapbox GL JS -->
+  <script src=https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js></script>
+  <link href=https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css rel="stylesheet" />
+  <!-- Import TURF and POLYLINE -->
+  <script src="https://npmcdn.com/@turf/turf/turf.min.js"></script>
+  <script src=https://cdnjs.cloudflare.com/ajax/libs/mapbox-polyline/1.1.1/polyline.js></script>
+  <!-- Import Mapbox GL Directions -->
+  <script src=https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.js></script>
+  <link rel="stylesheet" href=https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.0.2/mapbox-gl-directions.css type="text/css" />
+  <style>
+      body
+      {
+        margin: 0;
+        padding: 0;
+      }
+      #map
+      {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      .sidebar
+      {
+        position: absolute;
+        margin: 20px 20px 30px 20px;
+        width: 25%;
+        top: 0;
+        bottom: 0;
+        padding: 20px;
+        background-color: #FFFFFF;
+        overflow-y: scroll;
+        font-family: Open Sans, sans-serif;
+      }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+  <div id="map"></div>
+  <!-- Creating a sidebar for reports and information about the travel-->
+  <div class="sidebar">
+    <h1>Route Information</h1>
+    <div id="reports"></div>
+  </div>
+  <script>
+
+      mapboxgl.accessToken = 'pk.eyJ1IjoibmRhbHRvbjEiLCJhIjoiY2tsNWlkMHBwMTlncDJwbGNuNzJ6OGo2ciJ9.QbcnC4OnBjZU6P6JN6m3Pw';
+      var map = new mapboxgl.Map({
+      container: "map", // Specify the container ID
+      style: "mapbox://styles/mapbox/light-v10", // Specify which map style to use
+      center: [-97.7, 30.2],   // Specify the starting position [lng, lat]. STARTING POSITION IS DOWNTOWN AUSTIN
+      zoom: 9 // Specify the starting zoom
+    });
+  </script>
+
+</body>
+</html>
