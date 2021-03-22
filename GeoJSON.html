@@ -22,8 +22,13 @@
        center: [-97.7, 30.2],
        zoom: 9
      });
+     // Initialize the start and end coordinates. This makes it easier for us if we
+     // want to change the coordinates
+     let startCoordinate = '-97.752987,30.229009';
+     let endCoordinate = '-97.741089,30.272759';
      let request = new XMLHttpRequest();
-     var directionsAPICall = 'https://api.mapbox.com/directions/v5/mapbox/driving/-97.752987,30.229009;-97.741089,30.272759?geometries=geojson&overview=full&steps=true&access_token='+mapboxgl.accessToken;
+     // Store Mapbox directions API call in a variable
+     var directionsAPICall = 'https://api.mapbox.com/directions/v5/mapbox/driving/'+startCoordinate+';'+endCoordinate+'?geometries=geojson&overview=full&steps=true&access_token='+mapboxgl.accessToken;
      var responseJSON = "";
      request.open("GET", directionsAPICall);
      request.send();
