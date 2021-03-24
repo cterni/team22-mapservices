@@ -5,11 +5,29 @@
   <meta charset="utf-8">
   <title>Add a GeoJSON line</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css" rel="stylesheet">
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js"></script>
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <style>
       body { margin: 0; padding: 0; }
       #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+      .marker {
+        background-image: url('mapbox-icon.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .mapboxgl-popup {
+        max-width: 200px;
+      }
+
+      .mapboxgl-popup-content {
+        text-align: center;
+        font-family: 'Open Sans', sans-serif;
+      }
   </style>
   </head>
 <body>
@@ -43,8 +61,38 @@
          console.log("ERROR")
        }
      }
-
-     map.on('load', function () {
+     var geojson =
+     {
+       type: 'FeatureCollection',
+       features: [{
+         type: 'Feature',
+         geometry:
+         {
+           type: 'Point',
+           coordinates: [-97.752987,30.229009]
+         },
+         properties:
+         {
+           title: 'Mapbox',
+           description: "St. Edward's University"
+         }
+       },
+       {
+         type: 'Feature',
+         geometry:
+         {
+           type: 'Point',
+           coordinates: [-97.741089,30.272759]
+         },
+         properties:
+         {
+           title: 'Mapbox',
+           description: 'Texas State Capitol'
+         }
+       }]
+     };
+     map.on('load', function ()
+     {
        map.addSource('route',
        {
          'type': 'geojson',
@@ -67,6 +115,20 @@
            'line-width': 8
          }
        });
+     });
+     // add markers to map
+     geojson.features.forEach(function(marker)
+     {
+       // create a HTML element for each feature
+       var el = document.createElement('div');
+       el.className = 'marker';
+
+       // make a marker for each feature and add to the map
+       new mapboxgl.Marker(el)
+         .setLngLat(marker.geometry.coordinates)
+         .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+           .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
+         .addTo(map);
      });
      // Add zoom and rotation controls to the map.
      map.addControl(new mapboxgl.NavigationControl());
